@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Semantic CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.0/semantic.min.css"
+    integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>MyBookList</title>
+</head>
+
+<body>
+  <div class="ui container" style="padding-top: 3rem;">
+    <h1 style="text-align: center; font-size: 3rem;">
+      <i class="fas fa-book-open"></i>
+      My<span style="color: lightskyblue">Book</span>List
+    </h1>
+
+    <form id="book-form" class="ui form">
+      <div class="field">
+        <label for="title">Title</label>
+        <input type="text" id="title">
+      </div>
+
+      <div class="field">
+        <label for="author">Author</label>
+        <input type="text" id="author">
+      </div>
+
+      <div class="field">
+        <label for="isbn">ISBN#</label>
+        <input type="text" id="isbn">
+      </div>
+      <input type="submit" class="ui fluid button" value="Add Book">
+    </form>
+
+    <table class="ui blue selectable striped table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>ISBN#</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="book-list">
+        <tr>
+          <td>Book One</td>
+          <td>Sahil</td>
+          <td>768768</td>
+          <td><a href="#"><i class="far fa-trash-alt delete"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- JQuery JS -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+  <!-- Semantic JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
+    integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- APP JS -->
+  <script src="app.js"></script>
+</body>
+
+</html>
