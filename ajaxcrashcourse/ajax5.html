@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+    integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Ajax 5 - Fetch Data from Database</title>
+</head>
+
+<body>
+  <div class="ui container" style="padding-top: 2rem;">
+    <div class="ui container">
+      <button id="button" class="ui button">
+        Get Users
+      </button>
+      <div class="divider"></div>
+
+      <div class="ui raised segment">
+        <h1>
+          Users
+        </h1>
+        <div>
+          <table class="ui blue table">
+            <thead>
+              <th>ID</th>
+              <th>Name</th>
+            </thead>
+
+            <tbody id="users">
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('button').addEventListener('click', loadUsers);
+
+    // AJAX Request to load users from Database
+    function loadUsers() {
+      let xhr = new XMLHttpRequest();
+
+      xhr.open('GET', 'users.php', true);
+
+      xhr.onload = function () {
+        if (this.status == 200) {
+          var users = JSON.parse(this.responseText);
+
+          output = ``;
+
+          users.forEach(user => {
+            output += `
+              <tr>
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+              </tr>
+            `;
+          });
+
+          document.getElementById('users').innerHTML = output;
+        }
+      }
+
+      xhr.send();
+    }
+
+  </script>
+</body>
+
+</html>

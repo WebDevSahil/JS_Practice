@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+    integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Ajax 3 - External API</title>
+</head>
+
+<body>
+  <div class="ui container" style="padding-top: 2rem">
+    <button id="button" class="ui button">Load GitHub Users</button>
+
+    <div class="ui divider"></div>
+    <h1>GitHub Users</h1>
+
+    <div id="users" class="ui grid">
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('button').addEventListener('click', loadUsers);
+
+    // Load GitHub Users
+    function loadUsers() {
+      var xhr = new XMLHttpRequest();
+
+      xhr.open('GET', 'https://api.github.com/users', true);
+
+      xhr.onload = function () {
+        if (this.status == 200) {
+          let users = JSON.parse(this.responseText);
+
+          output = '';
+
+          users.forEach(user => {
+            output += `
+              <div class="three wide column">
+                <div class="ui card">
+                  <div class="image">
+                    <img src="${user.avatar_url}">
+                  </div>
+                  <div class="content">
+                    <a href="${user.url}" class="header">${user.login}</a>
+                  </div>
+                </div>  
+              </div>
+            `;
+          });
+
+          document.getElementById('users').innerHTML = output;
+        }
+      }
+
+      xhr.send();
+    }
+  </script>
+</body>
+
+</html>

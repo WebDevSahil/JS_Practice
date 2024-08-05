@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+    integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Ajax 4 - AJAX & PHP Forms</title>
+</head>
+
+<body>
+  <div class="ui container" style="padding-top: 2rem">
+    <h2 class="ui header">AJAX & PHP Forms</h2>
+    <div class="ui divider">
+    </div>
+
+    <!-- Normal PHP Form GET Request -->
+    <h1>PHP GET Form Request</h1>
+    <form method="GET" action="process.php" class="ui form">
+      <div class="field">
+        <label>Your Name</label>
+        <input type="text" name="name">
+      </div>
+      <button class="ui button" type="submit">Submit</button>
+    </form>
+
+
+    <div class="ui divider"></div>
+
+    <!-- AJAX Form GET Request -->
+    <h1>AJAX GET Form Request</h1>
+    <form id="getForm" class="ui form">
+      <div class="field">
+        <label>Your Name</label>
+        <input id="name1" type="text" name="name">
+      </div>
+      <button class="ui button" type="submit">Submit</button>
+    </form>
+
+
+    <!-- Normal PHP Form POST Request -->
+    <h1>PHP POST Form Request</h1>
+    <form method="POST" action="process.php" class="ui form">
+      <div class="field">
+        <label>Your Name</label>
+        <input type="text" name="name">
+      </div>
+      <button class="ui button" type="submit">Submit</button>
+    </form>
+
+
+    <!-- AJAX Form POST Request -->
+    <h1>AJAX PSOT Form Request</h1>
+    <form id="postForm" class="ui form">
+      <div class="field">
+        <label>Your Name</label>
+        <input id="name2" type="text" name="name">
+      </div>
+      <button class="ui button" type="submit">Submit</button>
+    </form>
+
+  </div>
+
+  <script>
+    document.getElementById('getForm').addEventListener('submit', getName);
+    document.getElementById('postForm').addEventListener('submit', postName);
+
+    // Function getName
+    function getName(e) {
+      e.preventDefault();
+      var xhr = new XMLHttpRequest();
+
+      var name = document.getElementById('name1').value;
+      xhr.open('GET', `process.php?name=${name}`, true);
+
+      xhr.onload = function () {
+        if (this.status == 200) {
+          console.log(this.responseText);
+        }
+      }
+
+      xhr.send();
+    }
+
+
+    // Function postName
+    function postName(e) {
+      e.preventDefault();
+      var xhr = new XMLHttpRequest();
+
+      var name = document.getElementById('name2').value;
+      var params = `name=${name}`;
+      xhr.open('POST', 'process.php', true);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      xhr.onload = function () {
+        if (this.status == 200) {
+          console.log(this.responseText);
+        }
+      }
+
+      xhr.send(params);
+    }
+  </script>
+</body>
+
+</html>

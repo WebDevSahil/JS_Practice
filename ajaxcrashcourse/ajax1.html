@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+    integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Ajax 1 - Text File</title>
+</head>
+
+<body>
+  <div class="ui container">
+    <button id="button" class="ui button">Get Text File</button>
+
+    <div class="ui divider"></div>
+
+    <div class="ui raised segment">
+      <p id="text"></p>
+    </div>
+  </div>
+
+  <script>
+    // Create an event listener
+    document.getElementById('button').addEventListener('click', loadText);
+
+    function loadText() {
+      // Create XHR Object
+      var xhr = new XMLHttpRequest();
+
+      // OPEN - type, url/file, async
+      xhr.open('GET', 'sample.txt', true);
+
+      // OPTIONAL - used for loaders
+      /*   xhr.onprogress = function () {
+          // console.log('READYSTATE: ', xhr.readyState);
+        }; */
+
+      xhr.onload = function () {
+        if (this.status == 200) {
+          // console.log('READYSTATE: ', xhr.readyState);
+          // console.log(this.responseText);
+          document.getElementById('text').textContent = this.responseText;
+        } else {
+          console.log('Error...');
+          document.getElementById('text').textContent = 'File Not found';
+        }
+      }
+
+      // To handle any error
+      /*  xhr.onerror = function () {
+ 
+ 
+       } */
+
+      // OLD WAY - ONREADYSTATECHANGE
+      /*  xhr.onreadystatechange = function () {
+         console.log('READYSTATE: ', xhr.readyState);
+         if (this.readyState == 4 && this.status == 200) {
+           // console.log(this.responseText);
+         }
+       } */
+
+      // Sends request
+      xhr.send();
+
+    }
+
+    // HTTP Statuses
+    // 200: "OK"
+    // 403: "Forbidden"
+    // 404: "Not Found"
+
+    // READYSTATE VALUES
+    // 0: request not initialized
+    // 1: server connection established
+    // 2: request received
+    // 3: processing request
+    // 4: request finished and response is ready
+  </script>
+</body>
+
+</html>
